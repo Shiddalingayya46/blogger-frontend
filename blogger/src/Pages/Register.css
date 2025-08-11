@@ -1,0 +1,23 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.register-card {
+  width: 400px;
+  max-width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .register-card {
+    width: 100%;
+    padding: 10px;
+  }
+}
