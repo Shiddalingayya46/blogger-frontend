@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./css/DisplayPosts.css";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ const DisplayPosts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const userId = localStorage.getItem("userId"); // Get logged-in user ID
+  const userId = localStorage.getItem("userId"); // logged-in user ID
 
   // Fetch posts
   const fetchPosts = async () => {
@@ -27,21 +27,27 @@ const DisplayPosts = () => {
   }, []);
 
   // Like / Dislike Post
-  const handleLike = async (postId) => {
+  const handleReaction = async (postId, action) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/post/like", {
-        postId,
-        userId,
-      });
+      const response = await axios.put(
+        "http://localhost:3000/api/post/reaction",
+        {
+          postId,
+          userId,
+          action,
+        }
+      );
+
+      const { likes, dislikes } = response.data;
 
       // Update posts locally
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
-          post._id === postId ? { ...post, likes: response.data.likes } : post
+          post._id === postId ? { ...post, likes, disLikes: dislikes } : post
         )
       );
     } catch (error) {
-      console.error("Error liking/disliking post:", error);
+      console.error("Error reacting to post:", error);
     }
   };
 
@@ -57,10 +63,10 @@ const DisplayPosts = () => {
     return `data:${imageData.contentType};base64,${base64String}`;
   };
 
-  if (loading) return <p className="loading">Loading posts...</p>;
+  if (loading) return <p className="dp-loading">Loading posts...</p>;
 
   return (
-    <div className="posts-container">
+    <div className="dp-posts-container">
       <button
         onClick={() => navigate("/create")}
         style={{
@@ -72,36 +78,52 @@ const DisplayPosts = () => {
       >
         Add Blog +
       </button>
-      <h2 className="posts-title">All Posts</h2>
+      <h2 className="dp-posts-title">All Posts</h2>
       {posts.length === 0 ? (
-        <p className="no-posts">No posts available</p>
+        <p className="dp-no-posts">No posts available</p>
       ) : (
         posts.map((post) => (
-          <div key={post._id} className="post-card">
-            <p className="post-description">
-              <strong>Description:</strong> {post.description}
+          <div key={post._id} className="dp-post-card">
+            <p className="dp-post-description">
+              <strong>caption:</strong> {post.description}
             </p>
-            <p className="post-user">
+            <p className="dp-post-user">
               <strong>User ID:</strong> {post.userId}
             </p>
             {post.imageData && (
               <img
                 src={getImageUrl(post.imageData)}
                 alt="Post"
-                className="post-image"
+                className="dp-post-image"
               />
             )}
 
-            <div className="like-section">
+            <div className="dp-like-section">
+              {/* LIKE button */}
               <button
-                className={`like-button ${
+                className={`dp-like-button ${
                   post.likes.includes(userId) ? "liked" : ""
                 }`}
-                onClick={() => handleLike(post._id)}
+                onClick={() => handleReaction(post._id, true)}
               >
-                {post.likes.includes(userId) ? "💔 Dislike" : "❤️ Like"}
+                {post.likes.includes(userId) ? "💔 Unlike" : "❤️ Like"}
               </button>
-              <span className="likes-count">{post.likes.length} Likes</span>
+              <span className="dp-likes-count">{post.likes.length} Likes</span>
+
+              {/* DISLIKE button */}
+              <button
+                className={`dp-dislike-button ${
+                  post.disLikes?.includes(userId) ? "disliked" : ""
+                }`}
+                onClick={() => handleReaction(post._id, false)}
+              >
+                {post.disLikes?.includes(userId)
+                  ? "↩️ Undo Dislike"
+                  : "👎 Dislike"}
+              </button>
+              <span className="dp-dislikes-count">
+                {post.disLikes?.length || 0} Dislikes
+              </span>
             </div>
           </div>
         ))

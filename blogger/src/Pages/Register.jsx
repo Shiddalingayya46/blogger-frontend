@@ -3,100 +3,67 @@ import axios from "axios";
 import "./Register.css";
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const register = async (e) => {
+    if (!name || !email || !password) {
+      alert("please all fields required");
+      return;
+    }
+    const payLoad = { name: name, email: email, password: password };
+
     try {
-      const res = await axios.post("http://localhost:3000/api/users", formData);
-      console.log("Response:", res.data);
-
-      // ✅ Success toast
-      alert("User registered successfully!");
-
-      // Optional: reset form
-      setFormData({ name: "", email: "", password: "" });
+      const response = await axios.post(
+        "http://localhost:3000/api/users",
+        payLoad
+      );
+      console.log("response", response);
+      if (response.status === 201) {
+        alert("user register succesfully");
+      } else {
+        alert("something went wrong");
+      }
     } catch (error) {
-      console.error("Error registering:", error);
-
-      // ✅ Error toast
-      alert("Registration failed. Please try again.");
+      alert("un able to server");
     }
   };
-
   return (
     <div className="register-container">
-      <div className="register-card">
-        <h2 style={{ textAlign: "center" }}>Register</h2>
-        <form onSubmit={handleSubmit} style={{ padding: "20px" }}>
-          <div style={{ marginBottom: "15px" }}>
-            <label>Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              required
-              style={{ width: "100%", padding: "8px" }}
-            />
-          </div>
-
-          <div style={{ marginBottom: "15px" }}>
-            <label>Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
-              style={{ width: "100%", padding: "8px" }}
-            />
-          </div>
-
-          <div style={{ marginBottom: "15px" }}>
-            <label>Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
-              style={{ width: "100%", padding: "8px" }}
-            />
-          </div>
-
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "10px",
-              background: "#4CAF50",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Register
-          </button>
-        </form>
-      </div>
+      <form onSubmit={register} className="register-form">
+        <h2 style={{ textAlign: "center", alignItems: "center" }}>Register</h2>
+        <input
+          className="register-card"
+          type="name"
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter Name"
+        />
+        <br />
+        <input
+          className="register-card"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter Email"
+        />
+        <br />
+        <input
+          className="register-card"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
+        />
+        <br />
+        <button
+          className="btn-input"
+          type="submit">
+          Register
+        </button>
+      </form>
     </div>
   );
 };
-
 export default Register;
+
+

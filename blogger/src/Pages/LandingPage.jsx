@@ -5,6 +5,7 @@ const LandingPage = () => {
   return (
     <div
       style={{
+        backgroundColor:"skyblue",
         display: "flex",
         flexDirection: "column",
         height: "100vh",
@@ -13,7 +14,6 @@ const LandingPage = () => {
       }}
     >
       <h1>Welcome to Blogger</h1>
-
       <div
         style={{
           display: "flex",
@@ -26,11 +26,12 @@ const LandingPage = () => {
             borderRadius: "10px",
             padding: "10px",
             cursor: "pointer",
-          }}
+         }}
           onClick={() => nav("/login")}
         >
-          Login
+         Login
         </button>
+
         <button
           style={{
             border: "none",
@@ -42,6 +43,7 @@ const LandingPage = () => {
         >
           Register
         </button>
+
       </div>
     </div>
   );

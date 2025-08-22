@@ -6,12 +6,13 @@
   align-items: center;
   background-color: #24292e;
   padding: 10px 20px;
-  color: white;
+  /* color: white; */
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  color: white;
 }
 
 .nav-left {
@@ -35,8 +36,15 @@
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
+  box-shadow: 1px 1px blue;
 }
 
 .nav-btn:hover {
   background-color: #024c9a;
+}
+
+.logo-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }

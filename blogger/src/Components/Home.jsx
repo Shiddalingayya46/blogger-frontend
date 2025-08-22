@@ -15,6 +15,7 @@ const Home = () => {
   return (
     <nav className="home">
       <div className="nav-left">
+        <img src="blog.png" alt="" className="logo-img" />
         <h2 className="logo">My Blog</h2>
       </div>
       <div className="nav-right">
@@ -29,6 +30,9 @@ const Home = () => {
             </Link>
             <Link to="/blogs" className="nav-btn">
               All Blogs
+            </Link>
+            <Link to="/mypost" className="nav-btn">
+              My posts
             </Link>
             <button onClick={handleLogout} className="nav-btn">
               Logout
