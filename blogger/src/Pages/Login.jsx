@@ -4,50 +4,63 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "", password: "" });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const login = async (e) => {
+    e.preventDefault(); // prevent page refresh
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (!email || !password) {
+      alert("All fields are required");
+      return;
+    }
+
     try {
-      const res = await axios.post(
+      const response = await axios.post(
         "http://localhost:3000/api/users/login",
-        form
+        {
+          email,
+          password,
+        }
       );
-      // alert("Login Successful");
-      localStorage.setItem("userId", res.data.userDetails.userId);
-      localStorage.setItem("email", res.data.userDetails.email);
-      navigate("/home");
-    } catch (err) {
-      alert(err.response?.data?.message || "Login Failed");
+
+      console.log("response", response.data.userDetails);
+
+      localStorage.setItem("userId", response.data.userDetails.userId);
+      localStorage.setItem("email", response.data.userDetails.email);
+
+      navigate("/home",{replace:true})
+
+    } catch (error) {
+      alert(error.response?.data?.message || "Unable to login");
+      console.error("Login error", error);
     }
   };
 
   return (
-    <div className="login-container">
-      <form className="login-card" onSubmit={handleSubmit}>
+    <div className="main-login">
+      <form onSubmit={login} className="login-form">
         <h2>Login</h2>
         <input
+          className="login-inputs"
           type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
           required
         />
         <input
+          className="login-inputs"
           type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
           required
         />
-        <button type="submit">Login</button>
+        <button className="login-button" type="submit">
+          Login
+        </button>
       </form>
     </div>
   );

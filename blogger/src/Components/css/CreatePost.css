@@ -1,0 +1,90 @@
+/* Container */
+.createpost-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+/* Form */
+.createpost-form {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Heading */
+.createpost-heading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Field wrapper */
+.createpost-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Labels */
+.createpost-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Textarea */
+.createpost-textarea {
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+.createpost-textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* File input */
+.createpost-file {
+  font-size: 14px;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.createpost-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.createpost-btn:hover {
+  background: #0056b3;
+}
+
+.createpost-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}

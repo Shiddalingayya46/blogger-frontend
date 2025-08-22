@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "./css/CreatePost.css";
 
 const CreatePost = () => {
   const [description, setDescription] = useState("");
@@ -13,18 +14,23 @@ const CreatePost = () => {
     const reader = new FileReader();
     reader.readAsDataURL(file); // converts to base64 string
     reader.onloadend = () => {
-      // remove the prefix "data:image/png;base64," if you want only raw base64
       const base64String = reader.result.split(",")[1];
       setImageBase64(base64String);
     };
   };
 
+  const userId = localStorage.getItem("userId");
+  console.log(userId);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userId = localStorage.getItem("userId"); // Make sure it's stored as a string
     if (!userId) {
       alert("User ID not found in local storage");
+      return;
+    }
+
+    if (!description || !imageBase64) {
+      alert("Please fill all fields");
       return;
     }
 
@@ -36,6 +42,8 @@ const CreatePost = () => {
       });
       console.log("Post created:", res.data);
       alert("Post created successfully!");
+      setDescription("");
+      setImageBase64("");
     } catch (err) {
       console.error(err);
       alert("Error creating post");
@@ -43,23 +51,36 @@ const CreatePost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ padding: "20px" }}>
-      <h2>Create Post</h2>
+    <div className="createpost-container">
+      <form onSubmit={handleSubmit} className="createpost-form">
+        <h2 className="createpost-heading">Create Post</h2>
 
-      <textarea
-        placeholder="Write description..."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        rows={4}
-        style={{ width: "100%", marginBottom: "10px" }}
-      />
+        <div className="createpost-field">
+          <label className="createpost-label">Caption</label>
+          <textarea
+            className="createpost-textarea"
+            placeholder="Write a caption..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
+          />
+        </div>
 
-      <input type="file" accept="image/*" onChange={handleImageChange} />
+        <div className="createpost-field">
+          <label className="createpost-label">Upload Image</label>
+          <input
+            className="createpost-file"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </div>
 
-      <button type="submit" style={{ display: "block", marginTop: "10px" }}>
-        Submit
-      </button>
-    </form>
+        <button className="createpost-btn" type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

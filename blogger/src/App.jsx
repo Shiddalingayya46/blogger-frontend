@@ -5,6 +5,7 @@ import LandingPage from "./Pages/LandingPage";
 import CreatePost from "./Components/CreatePost";
 import DisplayPosts from "./Components/DisplayPosts";
 import Home from "./Components/Home";
+import MyPost from "./Components/MyPost";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/create" element={<CreatePost />} />
       <Route path="/blogs" element={<DisplayPosts />} />
+      <Route path="/mypost" element={<MyPost />} />
     </Routes>
   );
 }
