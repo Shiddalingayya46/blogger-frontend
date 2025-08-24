@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // import Link
 import "./Login.css";
 
 const Login = () => {
@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const login = async (e) => {
-    e.preventDefault(); // prevent page refresh
+    e.preventDefault();
 
     if (!email || !password) {
       alert("All fields are required");
@@ -19,10 +19,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/users/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
 
       localStorage.setItem("userId", response.data.userDetails.userId);
@@ -59,6 +56,9 @@ const Login = () => {
         <button className="login-button" type="submit">
           Login
         </button>
+        <p>
+          Don't have an account? <Link to="/register">Register here</Link>
+        </p>
       </form>
     </div>
   );

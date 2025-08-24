@@ -80,3 +80,7 @@
   color: #777;
   margin-top: 30px;
 }
+.DeletedPosts-actions {
+  display: flex;
+  gap: 10px;
+}

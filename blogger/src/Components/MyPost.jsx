@@ -38,7 +38,9 @@ const MyPost = () => {
 
   const handleSoftDelete = async (postId) => {
     try {
-      await axios.put(`http://localhost:3000/api/post/soft-delete/${postId}`);
+      await axios.put(`http://localhost:3000/api/post/soft-delete/${postId}`, {
+        softDelete: true,
+      });
       setPosts((prev) => prev.filter((p) => p._id !== postId));
     } catch (error) {
       console.error("Error deleting post:", error);
