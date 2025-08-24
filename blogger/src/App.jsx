@@ -13,10 +13,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/create" element={<CreatePost />} />
-      <Route path="/blogs" element={<DisplayPosts />} />
-      <Route path="/mypost" element={<MyPost />} />
+      <Route path="/home/*" element={<Home />} />
     </Routes>
   );
 }

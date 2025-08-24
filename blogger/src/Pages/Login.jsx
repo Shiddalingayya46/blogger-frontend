@@ -25,13 +25,11 @@ const Login = () => {
         }
       );
 
-      console.log("response", response.data.userDetails);
-
       localStorage.setItem("userId", response.data.userDetails.userId);
       localStorage.setItem("email", response.data.userDetails.email);
+      localStorage.setItem("name", response.data.userDetails.name);
 
-      navigate("/home",{replace:true})
-
+      navigate("/home/blogs", { replace: true });
     } catch (error) {
       alert(error.response?.data?.message || "Unable to login");
       console.error("Login error", error);

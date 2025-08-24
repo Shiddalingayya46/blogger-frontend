@@ -1,0 +1,115 @@
+.MyPost-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.MyPost-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.MyPost-card {
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.MyPost-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.MyPost-caption {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #444;
+}
+
+.MyPost-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.MyPost-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.MyPost-stat {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.MyPost-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.MyPost-button:hover {
+  background: #0056b3;
+}
+
+.MyPost-button.danger {
+  background: #e53935;
+}
+
+.MyPost-button.danger:hover {
+  background: #b71c1c;
+}
+
+.MyPost-button.active {
+  outline: 2px solid #333;
+}
+
+.MyPost-loadMore {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 18px;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.MyPost-loadMore:hover {
+  background: #0056b3;
+}
+
+.MyPost-message {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  margin-top: 30px;
+}
+
+.MyPost-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}

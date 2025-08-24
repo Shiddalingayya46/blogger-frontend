@@ -1,50 +1,78 @@
-/* src/Components/css/Home.css */
-
-.home {
+.home-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #24292e;
-  padding: 10px 20px;
-  /* color: white; */
+  padding: 12px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
 }
 
-.logo {
-  font-size: 1.5rem;
+.home-nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.home-logo {
+  font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: #333;
 }
 
-.nav-left {
+.home-nav-right {
   display: flex;
   align-items: center;
 }
 
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-btn {
-  background-color: #0366d6;
+.home-nav-btn {
+  background: #3498db;
   color: white;
-  padding: 8px 14px;
-  border-radius: 4px;
-  text-decoration: none;
+  padding: 8px 12px;
+  margin-left: 8px;
   border: none;
-  font-size: 0.9rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  box-shadow: 1px 1px blue;
+  text-decoration: none;
+  font-size: 14px;
 }
 
-.nav-btn:hover {
-  background-color: #024c9a;
+.home-nav-btn:hover {
+  background: #2980b9;
 }
 
-.logo-img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+.home-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.home-dropdown-toggle {
+  background: #3498db;
+}
+
+.home-dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.home-dropdown-item {
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.home-logout {
+  color: red;
 }

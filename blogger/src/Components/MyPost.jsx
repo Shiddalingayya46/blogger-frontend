@@ -1,18 +1,30 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ import navigate hook
+import "./css/MyPost.css";
 
 const MyPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const userId = localStorage.getItem("userId");
+  const navigate = useNavigate(); // ✅ initialize navigate
 
-  const fetchMyPosts = async () => {
+  const fetchMyPosts = async (pageNumber = 1) => {
     try {
+      setLoading(true);
       const response = await axios.get(
-        `http://localhost:3000/api/post/user/${userId}`
+        `http://localhost:3000/api/post/user/${userId}?page=${pageNumber}&limit=2`
       );
-      setPosts(response.data);
+
+      const { posts: newPosts, totalPages, currentPage } = response.data;
+      setPosts((prev) =>
+        pageNumber === 1 ? newPosts : [...prev, ...newPosts]
+      );
+      setHasMore(currentPage < totalPages);
+      setPage(currentPage + 1);
     } catch (error) {
       console.error("Error fetching my posts:", error);
     } finally {
@@ -20,11 +32,18 @@ const MyPost = () => {
     }
   };
 
-  console.log(fetchMyPosts);
-
   useEffect(() => {
-    fetchMyPosts();
+    fetchMyPosts(1);
   }, []);
+
+  const handleSoftDelete = async (postId) => {
+    try {
+      await axios.put(`http://localhost:3000/api/post/soft-delete/${postId}`);
+      setPosts((prev) => prev.filter((p) => p._id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
 
   const getImageUrl = (imageData) => {
     if (!imageData || !imageData.data) return null;
@@ -36,35 +55,72 @@ const MyPost = () => {
     );
     return `data:${imageData.contentType};base64,${base64String}`;
   };
-  return (
-    <div className="MyPosts">
-      <h2>My Posts</h2>
-      {posts.length === 0 ? (
-        <p className="dp-no-posts">No posts available</p>
-      ) : (
-        posts.map((post) => (
-          <div key={post._id} className="mp-post-card">
-            <p className="mp-post-description">
-              <strong>caption:</strong> {post.description}
-            </p>
-            <p className="mp-post-user">
-              <strong>User ID:</strong> {post.userId}
-            </p>
-            {post.imageData && (
-              <img
-                src={getImageUrl(post.imageData)}
-                alt="Post"
-                className="mp-post-image"
-              />
-            )}
 
-            <div>
-              <p>likes: {post.likes.length}</p>
-              <p>disLikes: {post.disLikes.length}</p>
-            </div>
+  return (
+    <div>
+      {/* Toggle buttons */}
+      <div className="MyPost-toggle">
+        <button className="MyPost-button active">📌 My Posts</button>
+        <button
+          className="MyPost-button danger"
+          onClick={() => navigate("/home/deleted")} // ✅ navigate to deleted page
+        >
+          🗑 Deleted Posts
+        </button>
+      </div>
+
+      <div className="MyPost-container">
+        <h2 className="MyPost-title">My Posts</h2>
+
+        {loading && posts.length === 0 ? (
+          <p className="MyPost-message">Loading posts...</p>
+        ) : posts.length === 0 ? (
+          <p className="MyPost-message">No posts available</p>
+        ) : (
+          <div>
+            {posts.map((post) => (
+              <div key={post._id} className="MyPost-card">
+                <p className="MyPost-caption">
+                  <strong>Caption:</strong> {post.description}
+                </p>
+
+                {post.imageData && (
+                  <img
+                    src={getImageUrl(post.imageData)}
+                    alt="Post"
+                    className="MyPost-image"
+                  />
+                )}
+
+                <div className="MyPost-stats">
+                  <span className="MyPost-stat">
+                    👍 Likes: {post.likes.length}
+                  </span>
+                  <span className="MyPost-stat">
+                    👎 Dislikes: {post.disLikes.length}
+                  </span>
+                </div>
+
+                <button
+                  className="MyPost-button danger"
+                  onClick={() => handleSoftDelete(post._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+
+            {hasMore && (
+              <button
+                className="MyPost-loadMore"
+                onClick={() => fetchMyPosts(page)}
+              >
+                Load More
+              </button>
+            )}
           </div>
-        ))
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -20,7 +20,6 @@ const CreatePost = () => {
   };
 
   const userId = localStorage.getItem("userId");
-  console.log(userId);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,7 +39,6 @@ const CreatePost = () => {
         userId,
         imageBase64,
       });
-      console.log("Post created:", res.data);
       alert("Post created successfully!");
       setDescription("");
       setImageBase64("");
