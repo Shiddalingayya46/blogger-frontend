@@ -1,12 +1,11 @@
-
 .main-login{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin:10px;
-   /* width: 100vh; */
   height: 100vh;
+ 
 } 
 .login-form{
   width: 60vh;
@@ -19,14 +18,16 @@
   padding-left: 12px;
   background-color: rgb(255, 247, 247);
   border-radius: 8px;
- }
+}
 
 .login-inputs{
    border-radius: 8px;
    padding: 10px 10px;
     margin-bottom: 15px;
     width: 300px;
-    box-shadow: 0px, 5px 10px black;
+  box-shadow: 0 10px 15px white,
+              0 4px 6px white;
+ 
 }
 .login-button{
    border-radius: 10px;

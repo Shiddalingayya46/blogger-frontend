@@ -3,6 +3,7 @@
   margin: 20px auto;
   padding: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
 }
 
 .MyPost-title {
@@ -14,7 +15,7 @@
 }
 
 .MyPost-card {
-  background: #fff;
+  background: #ffffff; 
   border: 1px solid #e2e2e2;
   border-radius: 12px;
   padding: 16px;
@@ -49,7 +50,7 @@
 }
 
 .MyPost-stat {
-  background: #f8f8f8;
+  background: #eef2ff;
   border-radius: 8px;
   padding: 6px 12px;
   font-size: 14px;

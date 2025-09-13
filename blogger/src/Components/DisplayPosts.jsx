@@ -10,9 +10,8 @@ const DisplayPosts = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const userId = localStorage.getItem("userId"); // logged-in user ID
+  const userId = localStorage.getItem("userId"); 
 
-  // Convert MongoDB Buffer to base64 URL
   const getImageUrl = (imageData) => {
     if (!imageData || !imageData.data) return null;
     const base64String = btoa(
@@ -24,7 +23,6 @@ const DisplayPosts = () => {
     return `data:${imageData.contentType};base64,${base64String}`;
   };
 
-  // Fetch posts
   const fetchPosts = async (pageNumber) => {
     if (loading || !hasMore) return;
     setLoading(true);
@@ -45,13 +43,11 @@ const DisplayPosts = () => {
     }
   };
 
-  // Initial load
   useEffect(() => {
     fetchPosts(page);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
-  // Like / Dislike Post
   const handleReaction = async (postId, action) => {
     try {
       const response = await axios.put(
@@ -65,7 +61,6 @@ const DisplayPosts = () => {
 
       const { likes, dislikes } = response.data;
 
-      // Update posts locally
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post._id === postId ? { ...post, likes, disLikes: dislikes } : post
@@ -79,7 +74,7 @@ const DisplayPosts = () => {
   return (
     <div className="dp-posts-container">
       <button
-        onClick={() => navigate("/create")}
+        onClick={() => navigate("/home/create")}
         style={{
           border: "none",
           borderRadius: "10px",
@@ -91,7 +86,6 @@ const DisplayPosts = () => {
       </button>
       <h2 className="dp-posts-title">All Posts</h2>
 
-      {/* No posts case (only show once, not at the end) */}
       {!loading && posts.length === 0 ? (
         <p className="dp-no-posts">No posts available</p>
       ) : (
@@ -114,7 +108,6 @@ const DisplayPosts = () => {
               )}
 
               <div className="dp-like-section">
-                {/* LIKE button */}
                 <button
                   className={`dp-like-button ${
                     post.likes.includes(userId) ? "liked" : ""
@@ -127,7 +120,6 @@ const DisplayPosts = () => {
                   {post.likes.length} Likes
                 </span>
 
-                {/* DISLIKE button */}
                 <button
                   className={`dp-dislike-button ${
                     post.disLikes?.includes(userId) ? "disliked" : ""
@@ -145,7 +137,6 @@ const DisplayPosts = () => {
             </div>
           ))}
 
-          {/* Load More button */}
           {hasMore && !loading && (
             <button
               onClick={() => fetchPosts(page)}
@@ -155,10 +146,8 @@ const DisplayPosts = () => {
             </button>
           )}
 
-          {/* Loading indicator */}
           {loading && <p className="dp-loading">Loading more posts...</p>}
 
-          {/* End of posts (only show if posts exist) */}
           {!hasMore && posts.length > 0 && (
             <p className="dp-no-posts">No more posts</p>
           )}

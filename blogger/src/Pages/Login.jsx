@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom"; // import Link
+import { useNavigate, Link } from "react-router-dom"; 
 import "./Login.css";
 
 const Login = () => {
@@ -21,7 +21,6 @@ const Login = () => {
         "http://localhost:3000/api/users/login",
         { email, password }
       );
-
       localStorage.setItem("userId", response.data.userDetails.userId);
       localStorage.setItem("email", response.data.userDetails.email);
       localStorage.setItem("name", response.data.userDetails.name);

@@ -1,52 +1,35 @@
 import { useNavigate } from "react-router-dom";
+import "./LandingPage.css"; 
 
 const LandingPage = () => {
   const nav = useNavigate();
+
   return (
-    <div
-      style={{
-        backgroundColor:"skyblue",
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h1>Welcome to Blogger</h1>
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-        }}
-      >
+    <div className="land-page">
+      <h1 className="page-headline">Welcome to Blogger</h1>
+
+      <p className="page-description">
+       Developed a full-stack blogging platform using MongoDB, Express.js, React, and Node.js (MERN), enabling users to register, log in.  
+      </p>
+
+      <div className="page-buttons">
         <button
-          style={{
-            border: "none",
-            borderRadius: "10px",
-            padding: "10px",
-            cursor: "pointer",
-         }}
+          className="landpage-login"
           onClick={() => nav("/login")}
         >
-         Login
+          Login
         </button>
 
         <button
-          style={{
-            border: "none",
-            borderRadius: "10px",
-            padding: "10px",
-            cursor: "pointer",
-          }}
+          className="landpage-register"
           onClick={() => nav("/register")}
         >
           Register
         </button>
-
       </div>
     </div>
   );
 };
 
 export default LandingPage;
+

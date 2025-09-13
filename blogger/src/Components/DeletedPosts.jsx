@@ -33,12 +33,11 @@ const DeletedPosts = () => {
     fetchDeletedPosts(1);
   }, []);
 
-  // Restore post from bin
   const handleRestore = async (postId) => {
     try {
       await axios.put(
         `http://localhost:3000/api/post/soft-delete/${postId}`,
-        { softDelete: false } // ✅ send false to restore
+        { softDelete: false } 
       );
       setPosts((prev) => prev.filter((p) => p._id !== postId));
     } catch (error) {
@@ -46,7 +45,6 @@ const DeletedPosts = () => {
     }
   };
 
-  // Permanently delete post
   const handlePermanentDelete = async (postId) => {
     try {
       await axios.delete(
@@ -97,6 +95,7 @@ const DeletedPosts = () => {
                 >
                   ♻️ Restore
                 </button>
+                
                 <button
                   className="DeletedPosts-button danger"
                   onClick={() => handlePermanentDelete(post._id)}
@@ -121,3 +120,6 @@ const DeletedPosts = () => {
 };
 
 export default DeletedPosts;
+
+
+ 

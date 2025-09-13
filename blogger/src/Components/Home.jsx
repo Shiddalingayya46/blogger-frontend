@@ -1,4 +1,3 @@
-// src/Components/Home.js
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./css/Home.css";
@@ -32,15 +31,12 @@ const Home = () => {
             </Link>
           ) : (
             <div className="home-dropdown">
-              {/* Dropdown toggle button */}
               <button
                 className="home-nav-btn home-dropdown-toggle"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 Menu ▾
               </button>
-
-              {/* Dropdown menu */}
               {isOpen && (
                 <div className="home-dropdown-menu">
                   <Link

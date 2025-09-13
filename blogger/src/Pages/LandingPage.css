@@ -1,0 +1,61 @@
+.land-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #e6f0fa);
+  text-align: center;
+  padding: 20px;
+}
+
+.page-headline {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3e50;
+  margin-bottom: 20px;
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: #444;
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.page-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.landpage-login {
+  background-color: #2d89ef;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.landpage-login:hover {
+  background-color: #1a5db4;
+}
+
+.landpage-register {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.landpage-register:hover {
+  background-color: #1e7e34;
+}
+    

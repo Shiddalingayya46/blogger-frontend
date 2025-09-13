@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css/MyProfile.css"; // external CSS
+import "./css/MyProfile.css"; 
 
 const MyProfile = () => {
   const [user, setUser] = useState(null);
@@ -10,7 +10,6 @@ const MyProfile = () => {
 
   const userId = localStorage.getItem("userId");
 
-  // Convert Buffer -> Base64
   const bufferToBase64 = (buffer) => {
     const bytes = new Uint8Array(buffer);
     let binary = "";
@@ -18,7 +17,6 @@ const MyProfile = () => {
     return window.btoa(binary);
   };
 
-  // Fetch user details
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -28,7 +26,6 @@ const MyProfile = () => {
         setUser(res.data);
         setFormData(res.data);
 
-        // Convert profilePicture if exists
         if (res.data.profilePicture?.data?.data) {
           const base64 = bufferToBase64(res.data.profilePicture.data.data);
           setProfilePicBase64(
@@ -42,12 +39,10 @@ const MyProfile = () => {
     if (userId) fetchUser();
   }, [userId]);
 
-  // Handle text input
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle image upload
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -64,11 +59,10 @@ const MyProfile = () => {
     }
   };
 
-  // Submit update
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { name, imageBase64, contentType } = formData; // allowed fields only
+      const { name, imageBase64, contentType } = formData; 
       await axios.put(`http://localhost:3000/api/users/update/${userId}`, {
         name,
         imageBase64,
@@ -87,7 +81,6 @@ const MyProfile = () => {
     <div className="myprofile-container">
       <h2 className="myprofile-title">My Profile</h2>
       <form onSubmit={handleSubmit} className="myprofile-form">
-        {/* Profile Picture */}
         <div className="myprofile-image-section">
           <img
             src={
@@ -104,7 +97,6 @@ const MyProfile = () => {
           />
         </div>
 
-        {/* Name */}
         <div className="myprofile-field">
           <label className="myprofile-label">Name</label>
           <input
@@ -116,7 +108,6 @@ const MyProfile = () => {
           />
         </div>
 
-        {/* Email (read-only) */}
         <div className="myprofile-field">
           <label className="myprofile-label">Email</label>
           <input

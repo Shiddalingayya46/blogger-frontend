@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import navigate hook
+import { useNavigate } from "react-router-dom"; 
 import "./css/MyPost.css";
 
 const MyPost = () => {
@@ -10,8 +10,7 @@ const MyPost = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const userId = localStorage.getItem("userId");
-  const navigate = useNavigate(); // ✅ initialize navigate
-
+  const navigate = useNavigate();  
   const fetchMyPosts = async (pageNumber = 1) => {
     try {
       setLoading(true);
@@ -60,12 +59,11 @@ const MyPost = () => {
 
   return (
     <div>
-      {/* Toggle buttons */}
       <div className="MyPost-toggle">
         <button className="MyPost-button active">📌 My Posts</button>
         <button
           className="MyPost-button danger"
-          onClick={() => navigate("/home/deleted")} // ✅ navigate to deleted page
+          onClick={() => navigate("/home/deleted")} 
         >
           🗑 Deleted Posts
         </button>

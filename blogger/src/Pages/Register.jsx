@@ -1,15 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // import Link
+import { Link, useNavigate } from "react-router-dom"; 
 import "./Register.css";
+import { Navigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate =useNavigate();
+
   const register = async (e) => {
-    e.preventDefault(); // prevent page refresh
+    e.preventDefault(); 
 
     if (!name || !email || !password) {
       alert("All fields are required");
@@ -25,6 +28,7 @@ const Register = () => {
       );
       if (response.status === 201) {
         alert("User registered successfully");
+        navigate("/login")
       } else {
         alert("Something went wrong");
       }

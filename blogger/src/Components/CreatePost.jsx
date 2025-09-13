@@ -6,13 +6,12 @@ const CreatePost = () => {
   const [description, setDescription] = useState("");
   const [imageBase64, setImageBase64] = useState("");
 
-  // Convert image file to base64
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (!file) return;
 
     const reader = new FileReader();
-    reader.readAsDataURL(file); // converts to base64 string
+    reader.readAsDataURL(file); 
     reader.onloadend = () => {
       const base64String = reader.result.split(",")[1];
       setImageBase64(base64String);
@@ -80,6 +79,7 @@ const CreatePost = () => {
       </form>
     </div>
   );
-};
+ };
 
 export default CreatePost;
+
